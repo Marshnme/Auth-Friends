@@ -9,8 +9,8 @@ const Login = ( {values,status,history}) => {
     return(
         <div>
             <Form >
-                <Field type="text" name="username" ></Field>
-                <Field type="password" name="password" ></Field>
+                <Field type="text" name="username" placeholder="username" ></Field>
+                <Field type="password" name="password" placeholder="password"></Field>
                 <button type="submit">Submit</button>
             </Form>
         </div>
@@ -26,12 +26,12 @@ const FormikLogin = withFormik({
     },
     
     handleSubmit(values,{setStatus, resetForm, props}){
-        console.log("values",values)
+        // console.log("values",values)
         axiosWithAuth()
         .post("/api/login", values)
         .then(res => {
             localStorage.setItem("token", res.data.payload)
-            console.log("post response",res)
+            // console.log("post response",res)
             setStatus(res);
             props.history.push("/friends-list")
         })

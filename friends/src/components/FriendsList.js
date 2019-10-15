@@ -1,9 +1,9 @@
 import React,{useState, useEffect} from "react";
 import {axiosWithAuth} from "../utils/axiosWithAuth";
-
+import AddFriendForm from "./AddFriendForm"
 const FriendsList = () => {
-    const [friends, setFriends] = useState({})
-
+    const [friends, setFriends] = useState([{}])
+    console.log("FRIENDS1",friends)
     useEffect(()=> {
         getFriends()
     },[])
@@ -15,17 +15,17 @@ const FriendsList = () => {
             .then(res => {
                 console.log(res)
                 setFriends(res.data)
-                console.log("FRIENDS",friends)
             })
     }
     return(
         <div>
-            {/* {friends.map(friend => (
+            <AddFriendForm friends={friends} setFriends={setFriends}/>
+            {friends.map(friend => (
                 <div>
-                    <p>{friend.name}</p>
-                    <p>{friend.age}</p>
+                    <p>Friend:{friend.name}</p>
+                    <p>Age:{friend.age}</p>
                 </div>
-            ))} */}
+            ))}
         </div>
     );
 };
